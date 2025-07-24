@@ -10,16 +10,16 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t sathish1102/newimg6july:v1 .'
-                    sh 'docker images'
+                    sh 'sudo docker build -t sathish1102/newimg6july:v1 .'
+                    sh 'sudo docker images'
                 }
             }
         }
           stage('Docker login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push sathish1102/newimg6july:v1'
+                    sh "echo $PASS | sudo docker login -u $USER --password-stdin"
+                    sh 'sudo docker push sathish1102/newimg6july:v1'
                 }
             }
         }
